@@ -32,6 +32,9 @@ Update your `app.component.html` to include the `salute-container` component:
 
 ## Use service
 
+You can programatically add notifications to the queue using the `SaluteService.push` method throughout your
+application.
+
 Inject the `SaluteService` into your component:
 
 ```
@@ -40,11 +43,10 @@ import {SaluteLevel, SaluteNotification, SaluteService, SaluteThemeDark} from "@
 public constructor(public readonly saluteService: SaluteService) {}
 ```
 
-> You can programatically add notifications to the queue using the
-> `SaluteService.push` method throughout your application.
+Now you're ready to push notifications to the queue:
 
 ```typescript
-this.saluteService.push(new SaluteNotification({
+const notification = this.saluteService.push(new SaluteNotification({
     level: SaluteLevel.INFO,
     title: 'I have a themed title only!',
     timeout: Math.round(Math.random() * 10000),
@@ -57,9 +59,33 @@ this.saluteService.push(new SaluteNotification({
     }),
     static: true
 }));
+
+//
+// Listen for events (optional)
+//
+notification.onPause.subscribe((notification: SaluteNotification) => {
+    console.log('paused', notification);
+});
+notification.onResume.subscribe((notification: SaluteNotification) => {
+    console.log('resumed', notification);
+});
+notification.onTimeout.subscribe((notification: SaluteNotification) => {
+    console.log('timeout', notification);
+});
 ```
 
 The notification should show up now and will automatically be removed after 5 seconds (default).
+
+### Events
+
+Events are fired using an Rxjs `Subject` when the notification is clicked, paused, resumed or timed out.
+
+| Event       | Description                                                       |
+|-------------|-------------------------------------------------------------------|
+| `onClick`   | Fired when the notification is clicked (anywhere).                |
+| `onPause`   | Fired when the notification is paused (mouseeneter).              |
+| `onResume`  | Fired when the notification is resumed (mouseleave).              |
+| `onTimeout` | Fired when the notification is closed due to timeout (destroyed). |
 
 ## Customization
 
@@ -106,10 +132,19 @@ export enum SalutePosition {
 When passing a `theme` object to the `SaluteNotification` constructor, you can customize the look and feel of the
 notification.
 
-| Snippet                  | -                                   |
-|--------------------------|-------------------------------------|
-| `new SaluteThemeLight()` | ![SaluteThemeLight](docs/light.png) |
-| `new SaluteThemeDark()`  | ![SaluteThemeDark](docs/dark.png)   |
+| Snippet            | -                                   |
+|--------------------|-------------------------------------|
+| `SaluteThemeLight` | ![SaluteThemeLight](docs/light.png) |
+| `SaluteThemeDark`  | ![SaluteThemeDark](docs/dark.png)   |
+
+```typescript
+this.saluteService.push(new SaluteNotification({
+    title: 'I have a title only!',
+    theme: new SaluteThemeLight()
+}));
+```
+
+All available options ([projects/lib/src/salute-theme.ts](projects/lib/src/salute-theme.ts)):
 
 ```typescript
 export interface SaluteTheme {
@@ -125,8 +160,6 @@ export interface SaluteTheme {
     };
 }
 ```
-
-[salute-theme.ts](projects/lib/src/salute-theme.ts)
 
 # 👐 Contributing & Hacking
 
