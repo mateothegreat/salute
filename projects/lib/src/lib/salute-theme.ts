@@ -4,7 +4,11 @@ export interface SaluteTheme {
     padding?: string;
     color?: string;
     closeOpacity?: string;
-    title?: SaluteThemeTitle;
+    title?: {
+        color?: string;
+        fontSize?: string;
+        fontWeight?: string;
+    };
 }
 
 export class SaluteThemeTitle {
