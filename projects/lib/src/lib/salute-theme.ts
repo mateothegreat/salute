@@ -25,10 +25,10 @@ export class SaluteThemeLight implements SaluteTheme {
     public background = 'rgb(255, 255, 255, .5)';
     public borderRadius = '5px';
     public padding = '5px';
-    public color = '#444';
+    public color = '#666';
     public closeOpacity = '25%';
     public title = new SaluteThemeTitle({
-        color: '#ddd',
+        color: '#333',
         fontWeight: 'bold'
     });
 

@@ -82,6 +82,8 @@ constructor. See [salute-theme.ts](projects/lib/src/salute-theme.ts) for all ava
 
 ### Positioning (default: `top-right`)
 
+> This option can be applied to individual notifications or globally.
+
 The `SaluteContainerComponent` can be positioned anywhere in your application and will be
 on top of all other elements. The default position is `top-right`.
 
@@ -96,6 +98,15 @@ export enum SalutePosition {
 ```
 
 [salute-notification.ts](projects/lib/src/salute-notification.ts)
+
+### Theme (default: `SaluteThemeLight`)
+
+> This option can be applied to individual notifications or globally.
+
+| Snippet                         | -                                   |
+|---------------------------------|-------------------------------------|
+| `theme: new SaluteThemeLight()` | ![SaluteThemeLight](docs/light.png) |
+| `theme: new SaluteThemeDark()`  | ![SaluteThemeDark](docs/dark.png)   |
 
 ```typescript
 export interface SaluteTheme {

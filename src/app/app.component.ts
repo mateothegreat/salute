@@ -22,6 +22,15 @@ export class AppComponent {
     public constructor(public readonly saluteService: SaluteService) {
         this.saluteService.push(new SaluteNotification({
             level: SaluteLevel.SUCCESS,
+            theme: new SaluteThemeLight(),
+            title: 'Title and content passed',
+            content: 'asdfasdf asdf asdfadsf asd fasd fasdfasd fasdfasdfasdfasdfdas',
+            timeout: Math.round(Math.random() * 10000),
+            width: '400px',
+            static: true
+        }));
+        this.saluteService.push(new SaluteNotification({
+            level: SaluteLevel.SUCCESS,
             theme: new SaluteThemeDark(),
             title: 'Title and content passed',
             content: 'asdfasdf asdf asdfadsf asd fasd fasdfasd fasdfasdfasdfasdfdas',
