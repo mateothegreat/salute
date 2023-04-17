@@ -6,6 +6,7 @@
 
 # ⚡ Features
 
+* Zero dependencies (no fontpack for icons, no jQuery, no nothing!)
 * One line of code to show a notification. 🙏
 * Interactive pause and resume support.
 * Bring-your-own-component support (100% customization support). 💣
