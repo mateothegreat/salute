@@ -1,21 +1,28 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef } from '@angular/core';
+import { SaluteNotificationDefaultComponent } from './salute-notification-default.component';
 import { SaluteNotificationComponent } from './salute-notification.component';
 import { SaluteService } from './salute.service';
 
 @Component({
     standalone: true,
     selector: 'salute-container',
-    imports: [ CommonModule, SaluteNotificationComponent ],
+    imports: [ CommonModule, SaluteNotificationComponent, SaluteNotificationComponent, SaluteNotificationComponent, SaluteNotificationDefaultComponent ],
     template: `
         <ng-container #root>
             <div class="salute-container"
                  [style.right]="0"
                  [@listAnimation]="saluteService.config.notifications.length">
-                <salute-notification *ngFor="let notification of saluteService.config.notifications"
-                                     [style.display]="notification.timer.remaining > 0 ? 'block' : 'none'"
-                                     [notification]="notification"></salute-notification>
+                <ng-container *ngFor="let notification of saluteService.config.notifications">
+                    <salute-notification
+                        *ngIf="!isString(notification.content)"
+                        [style.display]="notification.static || notification.timer.remaining > 0 ? 'block' : 'none'"
+                        [notification]="notification"></salute-notification>
+                    <salute-notification-default *ngIf="isString(notification.content)"
+                                                 [style.display]="notification.static || notification.timer.remaining > 0 ? 'block' : 'none'"
+                                                 [notification]="notification"></salute-notification-default>
+                </ng-container>
             </div>
         </ng-container>
     `,
@@ -25,25 +32,18 @@ import { SaluteService } from './salute.service';
                 position: fixed;
                 display: flex;
                 flex-direction: column;
-                margin: 15px;
-                font-family: "Ubuntu Nerd Font";
-
+                margin: 10px;
             }
 
-            salute-notification {
+            .salute-container * {
                 border-radius: 4px;
                 margin-top: 10px;
-                box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-
             }
 
-            salute-notification:first-child {
+            .salute-container *:first-child {
                 margin-top: 0;
             }
 
-            .salute-notification-info {
-                background: cornflowerblue;
-            }
         `
     ],
     animations: [
@@ -77,14 +77,14 @@ import { SaluteService } from './salute.service';
         ])
     ]
 })
-export class SaluteContainerComponent implements AfterViewInit {
+export class SaluteContainerComponent {
     @ViewChild('root', { read: ViewContainerRef }) public root: ViewContainerRef;
 
     public constructor(public readonly saluteService: SaluteService) {
 
     }
 
-    public ngAfterViewInit(): void {
-        console.log(this.root);
+    public isString(t: any): boolean {
+        return typeof t === 'string';
     }
 }

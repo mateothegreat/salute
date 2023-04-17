@@ -6,10 +6,10 @@ import { SaluteTimer } from './salute-timer';
 
 export class SaluteNotification {
     public id?: string | number = Math.random() * 1000000;
-    public level?: SaluteLevel = SaluteLevel.Info;
+    public level?: SaluteLevel = SaluteLevel.INFO;
     public title?: string;
     public content: string | Type<any>;
-    public sticky?: boolean;
+    public static?: boolean;
     public position?: SalutePosition;
     public timeout?: number = 5000;
     public timer?: SaluteTimer;

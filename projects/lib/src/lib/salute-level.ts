@@ -1,6 +1,6 @@
 export enum SaluteLevel {
-    Info = 'info',
-    Success = 'success',
-    Warning = 'warning',
-    Error = 'error'
+    INFO = 'INFO',
+    SUCCESS = 'SUCCESS',
+    WARNING = 'WARNING',
+    ERROR = 'ERROR'
 }

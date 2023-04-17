@@ -5,11 +5,13 @@ import { SaluteContainerComponent } from '../../projects/lib/src/lib/salute-cont
 
 import { AppComponent } from './app.component';
 import { InteractiveComponent } from './custom-notifications/interactive/interactive.component';
+import { StaticComponent } from './custom-notifications/static/static.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        InteractiveComponent
+        InteractiveComponent,
+        StaticComponent
     ],
     imports: [
         BrowserModule,

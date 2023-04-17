@@ -13,15 +13,19 @@ export class SaluteService {
     public constructor() {
     }
 
-    public push(notification: SaluteNotification): void {
-        notification.timer = new SaluteTimer(() => {
-            this.pop(notification.id);
-        }, notification.timeout || this.config.timeout || 5000);
+    public push(notification: SaluteNotification): SaluteNotification {
+        if (!notification.static) {
+            notification.timer = new SaluteTimer(() => {
+                this.pop(notification.id);
+            }, notification.timeout || this.config.timeout || 5000);
+        }
 
         this.config.notifications.push(notification);
 
         // let index = this.toastsBag.findIndex((n) => n.id === toast.id);
         // this.toastsBag.splice(index, 1, toast);
+
+        return notification;
     }
 
     public pop(id: string | number): void {
@@ -31,7 +35,7 @@ export class SaluteService {
     public info(content: string | Type<any>): void {
         this.push(new SaluteNotification({
             content,
-            level: SaluteLevel.Info
+            level: SaluteLevel.INFO
         }));
     }
 }

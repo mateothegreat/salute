@@ -5,7 +5,7 @@ export interface SaluteTheme {
 }
 
 export class SaluteThemeDefault implements SaluteTheme {
-    public background = '#8cbdff';
+    public background = '#eeeeee';
     public borderRadius = '5px';
     public padding = '5px';
 }
