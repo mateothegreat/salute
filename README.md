@@ -103,10 +103,13 @@ export enum SalutePosition {
 
 > This option can be applied to individual notifications or globally.
 
-| Snippet                         | -                                   |
-|---------------------------------|-------------------------------------|
-| `theme: new SaluteThemeLight()` | ![SaluteThemeLight](docs/light.png) |
-| `theme: new SaluteThemeDark()`  | ![SaluteThemeDark](docs/dark.png)   |
+When passing a `theme` object to the `SaluteNotification` constructor, you can customize the look and feel of the
+notification.
+
+| Snippet                  | -                                   |
+|--------------------------|-------------------------------------|
+| `new SaluteThemeLight()` | ![SaluteThemeLight](docs/light.png) |
+| `new SaluteThemeDark()`  | ![SaluteThemeDark](docs/dark.png)   |
 
 ```typescript
 export interface SaluteTheme {
