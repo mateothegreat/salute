@@ -19,7 +19,7 @@ import { SaluteService } from './salute.service';
                         *ngIf="!isString(notification.content)"
                         [style.display]="notification.static || notification.timer.remaining > 0 ? 'block' : 'none'"
                         [notification]="notification"></salute-notification>
-                    <salute-notification-default *ngIf="isString(notification.content)"
+                    <salute-notification-default *ngIf="!notification.content || isString(notification.content)"
                                                  [style.display]="notification.static || notification.timer.remaining > 0 ? 'block' : 'none'"
                                                  [notification]="notification"></salute-notification-default>
                 </ng-container>
@@ -33,6 +33,8 @@ import { SaluteService } from './salute.service';
                 display: flex;
                 flex-direction: column;
                 margin: 10px;
+                z-index: 9999;
+                align-items: end;
             }
 
             .salute-container * {
@@ -43,7 +45,6 @@ import { SaluteService } from './salute.service';
             .salute-container *:first-child {
                 margin-top: 0;
             }
-
         `
     ],
     animations: [
