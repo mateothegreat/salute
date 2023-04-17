@@ -105,7 +105,7 @@ The default levels are:
 | `SaluteLevel.ERROR`   | `#F44336` |
 
 You can customize the look and feel of the notification by passing a `theme` object to the `SaluteNotification`
-constructor. See [salute-theme.ts](projects/lib/src/salute-theme.ts) for all available options.
+constructor. See [salute-theme.ts](projects/lib/src/lib/salute-theme.ts) for all available options.
 
 ### Positioning (default: `top-right`)
 
@@ -124,7 +124,7 @@ export enum SalutePosition {
 }
 ```
 
-[salute-notification.ts](projects/lib/src/salute-notification.ts)
+[salute-notification.ts](projects/lib/src/lib/salute-notification.ts)
 
 ### Theme (default: `SaluteThemeLight`)
 
@@ -145,7 +145,7 @@ this.saluteService.push(new SaluteNotification({
 }));
 ```
 
-All available options ([projects/lib/src/salute-theme.ts](projects/lib/src/salute-theme.ts)):
+All available options ([projects/lib/src/lib/salute-theme.ts](projects/lib/src/salute-theme.ts)):
 
 ```typescript
 export interface SaluteTheme {
